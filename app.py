@@ -60,7 +60,7 @@ if experience > (age - 18):
 
 st.divider()
 
-if st.button("🔮 Predict Salary", type="primary", use_container_width=True):
+if st.button(" Predict Salary", type="primary", use_container_width=True):
     input_dict = {
         "Age": age,
         "Years of Experience": experience,
