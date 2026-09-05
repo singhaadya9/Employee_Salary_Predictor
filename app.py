@@ -1,9 +1,4 @@
-"""
-app.py
-------
-Streamlit interface for the Employee Salary Predictor.
-Run with:  streamlit run app.py
-"""
+
 
 import joblib
 import numpy as np
@@ -72,7 +67,7 @@ if st.button(" Predict Salary", type="primary", use_container_width=True):
     }
     input_df = pd.DataFrame([input_dict])
 
-    # Encode categoricals using the saved LabelEncoders
+
     for col, le in encoders.items():
         input_df[col] = le.transform(input_df[col])
 
