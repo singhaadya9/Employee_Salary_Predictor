@@ -1,14 +1,4 @@
-"""
-generate_dataset.py
---------------------
-Generates a realistic synthetic dataset for the Employee Salary Predictor
-project and saves it to data/employee_salary.csv.
 
-Why synthetic data? It lets the whole pipeline run offline/anywhere while
-still behaving like a real-world salary dataset: correlated features,
-category-based effects, and realistic noise. Swap this file out for
-pd.read_csv("your_real_dataset.csv") if you have real data to use instead.
-"""
 
 import numpy as np
 import pandas as pd
@@ -48,7 +38,6 @@ for _ in range(N):
     gender = np.random.choice(genders, p=[0.55, 0.45])
     education = np.random.choice(education_levels, p=[0.15, 0.45, 0.30, 0.10])
 
-    # Years of experience correlated with age, capped sensibly
     max_possible_exp = age - 20
     experience = int(np.clip(np.random.normal(max_possible_exp * 0.55, 4), 0, max(max_possible_exp, 0)))
 
@@ -60,15 +49,15 @@ for _ in range(N):
     exp_component = experience * education_exp_multiplier[education]
     salary = (base + exp_component) * dept_multiplier[department] * location_multiplier[location]
 
-    # Small manager/senior/lead title bump if applicable
+   
     for keyword, bump in title_bump.items():
         if keyword in job_title:
             salary += bump
 
-    # Slight age-based seniority premium + random noise
+
     salary += age * 150
-    salary += np.random.normal(0, 3500)  # noise
-    salary = max(salary, 15000)  # floor
+    salary += np.random.normal(0, 3500) 
+    salary = max(salary, 15000)  
 
     rows.append({
         "Age": age,
@@ -83,7 +72,6 @@ for _ in range(N):
 
 df = pd.DataFrame(rows)
 
-# Introduce a small number of missing values to make preprocessing meaningful
 for col in ["Age", "Years of Experience"]:
     missing_idx = np.random.choice(df.index, size=int(0.01 * N), replace=False)
     df.loc[missing_idx, col] = np.nan
