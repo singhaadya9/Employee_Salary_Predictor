@@ -34,7 +34,7 @@ except FileNotFoundError:
     )
     st.stop()
 
-st.title("💼 Employee Salary Predictor")
+st.title("Employee Salary Predictor")
 st.write(
     "Enter an employee's details below to predict their expected annual salary. "
     f"Powered by a **{best_model_name}** model trained on employee data."
@@ -76,7 +76,7 @@ if st.button("🔮 Predict Salary", type="primary", use_container_width=True):
     for col, le in encoders.items():
         input_df[col] = le.transform(input_df[col])
 
-    # Scale numeric columns using the saved scaler
+ 
     input_df[numeric_cols] = scaler.transform(input_df[numeric_cols])
 
     input_df = input_df[feature_cols]
@@ -88,7 +88,7 @@ if st.button("🔮 Predict Salary", type="primary", use_container_width=True):
         "not a guaranteed figure."
     )
 
-with st.expander("📊 About this model"):
+with st.expander(" About this model"):
     try:
         comparison = pd.read_csv("model/model_comparison.csv")
         st.write("Model comparison from training (on held-out test data):")
